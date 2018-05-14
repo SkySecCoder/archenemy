@@ -18,7 +18,7 @@ def searchFunc(shodanKey):
 	api = shodan.Shodan(shodanKey)
 	try:
         	# Search Shodan
-        	results = api.search('73.47.31.220')
+        	results = api.search('apache')
         	# Show the results
         	print 'Results found: %s' % results['total']
         	for result in results['matches']:
