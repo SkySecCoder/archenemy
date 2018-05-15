@@ -1,7 +1,9 @@
-#!/usr/bin/python
+#!/usr/bin/python - 
 
 import sys
 import os
+import socket
+import getpass
  
 def main():
 	miniBanner()
@@ -29,7 +31,15 @@ def makeChoice():
 		print "Exiting..."
 
 def miniBanner():
-	welcomeMsg = ["Welcome to Octopus", "Version 1.0 ", "Choose a mode "]
+	try:
+		localIP = socket.gethostbyname(socket.gethostname())
+		username = getpass.getuser()
+		hostname = socket.gethostname()
+		cwd = os.getcwd()
+		print "\n"+"System information:\n\n"+"System IP address:"+ localIP + "   \nCurrent user:" + username + "   \nHostname:" + hostname + "   \nCurrent working directory:" + cwd
+	except:
+		pass
+	welcomeMsg = ["Welcome to Archenemy", "Version 1.0 ", "Choose a mode "]
 	widthOfMsg = 35 # Adjusting width of welcome message
 	print "\n",
 	for msg in welcomeMsg:
