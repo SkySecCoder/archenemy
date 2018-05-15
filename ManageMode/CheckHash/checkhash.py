@@ -14,7 +14,6 @@ def main():
 	#parser.add_option('-x', dest='xname', type='string',help='To generate your own hash')
 	(options, args) = parser.parse_args()
 	if ((options.dname == None) & (options.zname == None)) | ((options.dname == None) & (options.bname ==None)):
-		makeBanner("HashBrown")
 		print "\n1. Hash breaking\n2. Generate hash\n3. Extract Zip file"
 		choice=raw_input("\nEnter your choice(1-3): ")
 		if str(choice)=="1":	
@@ -101,40 +100,6 @@ def genHash():
 	print "\n["+colored("+","green")+"] Salt used for your hash is: "+colored(salt,"green")
 	print "["+colored("+","green")+"] Hashed string: "+colored(toHash,"green")
 	print "["+colored("+","green")+"] Hash Value: "+colored(Hash,"green")
-
-def makeBanner(name):
-    i=j=0
-    while j!= 15:
-        if j==0 or j==14:
-            while i != 40:
-                if i==0:
-                    print "*",
-                elif i==39:
-                    print "*"
-                else:
-                    print "=",
-                i = i+1
-        i = 0
-        if j>0 and j<12:
-            if j == 7:
-                k = 30
-            elif j == 6:
-                k = 40 - len(name) + 5
-            else:
-                k = 40
-            while i != k:
-                if i == 0:
-                    print "|",
-                elif i == k-1:
-                    print "|"
-                elif i == k/2 and j == 7:
-                    print "- by SkySecCoder     ",
-                elif i == k/2 and j == 6:
-                    print name,
-                else:
-                    print " ",
-                i = i + 1
-        j = j + 1
 
 
 if __name__=="__main__":
