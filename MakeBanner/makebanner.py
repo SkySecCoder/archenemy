@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python -
 
 import os
 
@@ -32,7 +32,7 @@ def main():
 	print '''                                                                                                 `Y8P'      '''
 	print "\n\n[+] Made by: Skyseccoder"
 	print "[+] Version: 1.1" 
-	os.system("python octopus.py")                                                                                      
+	os.system("python archenemy.py")                                                                                      
 
 if __name__ == "__main__":  
 	main()                                                         
