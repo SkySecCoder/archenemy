@@ -2,9 +2,7 @@
 
 import optparse
 import os 
-from subprocess import call
 
-'''
 def main():
 	print "My name : "+__file__
 	initialfileexist = initialcheck()
@@ -12,20 +10,6 @@ def main():
 		attack()
 	else:
 		initsetup()
-'''
-def main():
-	parser = optparse.OptionParser("usage %prog [-z <zipfile> -d <dictionary>][-b <hashfile> -d <dictionary>]")
-	parser.add_option('-n', dest='nname', type='int',help='number to pass')
-	(options, args) = parser.parse_args()
-	if options.nname == None:
-		print options.nname
-		os.system("python sillyworm.py -n "+str(0))
-	else:
-		if options.nname < 5:
-			print options.nname
-			os.system("python sillyworm.py -n "+str(options.nname + 1))
-		else:
-			print "Broken..."
 
 def initsetup():
 	i = 0
@@ -45,25 +29,15 @@ def attack():
 	myfilename = os.path.basename(__file__)
 	myfilename = myfilename.strip(".py")
 	myfilenumber = int(myfilename.strip("dump"))
-	if myfilenumber != 3:
-		os.system("mkdir "+os.getcwd()+"/"+myfilename)
-		print "Made "+os.getcwd()+"/"+myfilename
-		while myfilenumber != 3:
+	if myfilenumber < 3:
+		os.system("mkdir "+os.path.dirname(os.path.abspath(__file__))+"/"+myfilename)
+		#print "Made "+os.getcwd()+"/"+myfilename
+		while myfilenumber < 3:
 			childfilename = "dump"+str(myfilenumber+1)+".py"
-			os.system("cat "+myfilename+".py > ./"+myfilename+"/"+childfilename)
+			os.system("cat "+myfilename+".py > "+os.path.dirname(os.path.abspath(__file__)) + "/" + myfilename + "/" + childfilename)
 			print "made child "+myfilename+".py > ./"+myfilename+"/"+childfilename
 			myfilenumber += 1
-	runchildattack()
-
-def runchildattack():
-	cmd = ""
-	childrentorun = []
-	myfilename = os.path.basename(__file__)
-	myfilename = myfilename.strip(".py")
-	corecurrentdir = "."+os.path.basename(__file__).strip(myfilename+".py")+"/"+myfilename
-	print "I want core = "+corecurrentdir
-	for file in os.listdir(corecurrentdir):
-		bashit(corecurrentdir+"/"+file)
+			os.system("python "+os.path.dirname(os.path.abspath(__file__)) + "/" + myfilename + "/" + childfilename)
      			
 def initialcheck():
 	currfile = os.path.basename(__file__)
