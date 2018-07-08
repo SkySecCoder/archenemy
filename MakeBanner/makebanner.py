@@ -19,7 +19,7 @@ def main():
 	print "   \  \:\/:/     \  \:\/:/        \  \:\   \  \:\/:/     \  \:\      \  \:\/:/     \__\/ /:/   "
 	print "    \  \::/       \  \::/          \__\/    \  \::/       \  \:\      \  \::/        /__/:/    "
 	print "     \__\/         \__\/                     \__\/         \__\/       \__\/         \__\/     "
-	'''		                                                                                      
+	'''
 	print '''\n'''
 	print '''      .o.                          oooo                                                                     '''
 	print '''     .888.                         `888                                                                     '''
@@ -31,32 +31,12 @@ def main():
 	print '''                                                                                                 .o..P'     '''
 	print '''                                                                                                 `Y8P'      '''
 	print "\n\n[+] Made by: Skyseccoder"
-	print "[+] Version: 1.1" 
-	os.system("python archenemy.py")                                                                                      
+	print "[+] Version: 1.1"
+	currDir = os.listdir(".")
+	if "makebanner.py" in currDir:
+		pass
+	else:
+		os.system("python archenemy.py")
 
-if __name__ == "__main__":  
-	main()                                                         
-                                                                                              
-                                                                                              
-                                                                                              
-                                                                                              
-                                                                                              
-                                                    
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                                                                            
-                       
-                                                                
+if __name__ == "__main__":
+	main()
