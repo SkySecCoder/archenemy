@@ -30,8 +30,7 @@ def attack():
 	myfilename = myfilename.strip(".py")
 	myfilenumber = int(myfilename.strip("dump"))
 	if myfilenumber < 3:
-		os.system("mkdir "+os.path.dirname(os.path.abspath(__file__))+"/"+myfilename)
-		#print "Made "+os.getcwd()+"/"+myfilename
+		os.system("mkdir "+os.path.abspath(__file__).strip(myfilename+".py")+"/"+myfilename)
 		while myfilenumber < 3:
 			childfilename = "dump"+str(myfilenumber+1)+".py"
 			os.system("cat "+myfilename+".py > "+os.path.dirname(os.path.abspath(__file__)) + "/" + myfilename + "/" + childfilename)
