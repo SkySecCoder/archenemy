@@ -8,5 +8,3 @@ echo "[+] Installing shodan."
 sudo easy_install shodan
 sudo easy_install -U shodan
 
-echo "[+] Installing Crypto"
-sudo pip install Crypto

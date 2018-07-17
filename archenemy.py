@@ -11,9 +11,10 @@ def main():
 
 def makeChoice():
 	allMode = {}
-	genCounter = 1
+	genCounter = 2
 	directories = os.listdir("./")
 	allMode[0] = "Exit"
+	allMode[1] = "Install Dependencies"
 	for name in directories:
 		if name[(len(name)-4):len(name)] == "Mode":	
 			allMode[genCounter] = name
@@ -22,13 +23,16 @@ def makeChoice():
 	genCounter = 0 
 	for key in allMode:
 		print "["+str(key)+"] "+allMode[key]
-	#print "["+str(key+1)+"] Make Banner"
-	choice = raw_input("\nType choice: ")
-	if choice != "0":
+	#choice = raw_input("\nType choice: ")
+	choice = 4 ##########hard coded for testing
+	if choice == 0:
+		print "[+] Exiting..."
+	elif choice == 1:
+		os.system("sudo bash loadAllServices.sh")
+	elif (choice > 1) and (choice < 6):
 		os.system("python ./"+allMode[int(choice)]+"/"+allMode[int(choice)].lower()+".py")
 	else:
-		#os.system("python banner.py")
-		print "Exiting..."
+		print "[-] Exiting due to wrong option..."
 
 def miniBanner():
 	try:
