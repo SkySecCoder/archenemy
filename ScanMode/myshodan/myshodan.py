@@ -5,10 +5,12 @@ import os
 import json
 
 def main():
+	
 	print "[+] Retrieving API Key..."
 	try:
-		SHODAN_API_KEY = readKey()
-		searchFunc(SHODAN_API_KEY)
+		#SHODAN_API_KEY = readKey()
+		#searchFunc(SHODAN_API_KEY)
+		readKey()
 	except Exception, E:
 		print "[-] Could not retrieve Shodan API key..."+str(E)
 

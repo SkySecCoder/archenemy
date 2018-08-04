@@ -4,6 +4,7 @@ import sys
 import os
 
 def main():
+	print "\n[+] Entering Manage Mode...\n"
 	allMode = {}
 	genCounter = 1
 	directories = os.listdir("./ManageMode")
